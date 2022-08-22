@@ -82,13 +82,14 @@ export class FormComponent implements OnInit {
 
      
     } else {
-      console.log('actualizacion de usuario', this.miFormulario.value.id)
-      console.log(this.miFormulario.value)
+
+      console.log('id', this.miFormulario.value)
+      const index = this.miFormulario.value.id -1
 
       this.fs.updatePerson(this.miFormulario.value.id, this.miFormulario.value)
 
-      
-      this.persons[this.miFormulario.value.id-1] = this.miFormulario.value
+      console.log(this.persons[0])
+      this.persons[index] = this.miFormulario.value
       
     }
 
