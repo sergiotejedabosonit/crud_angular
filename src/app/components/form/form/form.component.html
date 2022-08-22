@@ -52,7 +52,7 @@
         <span *ngIf="campoEsValido('city')" class="form-text text-danger">Campo obligatorio</span>
     </div>
 
-    <button type="submit" class="mt-2 float-end" mat-stroked-button [disabled]="!miFormulario.valid">
+    <button type="submit" class="mt-2 float-end button_pointier" mat-stroked-button [disabled]="!miFormulario.valid">
         {{ miFormulario.get('id')?.value ? 'Actualizar' : 'Crear' }}
     </button>
     

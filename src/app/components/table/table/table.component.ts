@@ -5,7 +5,14 @@ import { FormServiceService } from '../../../service/form-service.service';
 
 @Component({
   selector: 'app-table',
-  templateUrl: './table.component.html' 
+  templateUrl: './table.component.html',
+  styles: [
+    `
+      .button_pointier{
+        cursor: pointer;
+      }
+    `
+  ]
 })
 export class TableComponent implements OnInit {
   

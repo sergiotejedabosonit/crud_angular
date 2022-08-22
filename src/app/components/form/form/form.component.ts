@@ -9,7 +9,14 @@ import { Person } from '../../../interfaces/person.interface';
 
 @Component({
   selector: 'app-form',
-  templateUrl: './form.component.html' 
+  templateUrl: './form.component.html',
+  styles: [
+    `
+      .button_pointier{
+        cursor: pointer;
+      }
+    `
+  ]
 })
 export class FormComponent implements OnInit {
 
