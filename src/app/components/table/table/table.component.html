@@ -1,0 +1,36 @@
+<div class="container">
+
+    <p-table [value]="persons" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nombre de usuario</th>
+                <th>Correo</th>
+                <th>Suscrito</th>
+                <th>Pais</th>
+                <th>Ciudad</th>
+                <th>Actions</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-person>
+            <tr>
+                <td>{{person.name}}</td>
+                <td>{{person.email}}</td>
+                <td>
+                    <span *ngIf="person.notifications === true"><i class="pi pi-check-circle"></i></span>
+                    <span *ngIf="person.notifications === false"><i class="pi pi-times-circle"></i></span>
+                </td>
+                <td>{{person.country}}</td>
+                <td>{{person.city}}</td>
+                <td>
+
+                    <i class="pi pi-user-edit mx-2" (click)="buscarUser(person.id)"></i>
+
+                    <i class="pi pi-trash" (click)="eliminarUser(person.id)"></i>
+
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    
+
+</div>
