@@ -2,6 +2,7 @@ import { Component, DoCheck, EventEmitter, Input, OnInit, Output } from '@angula
 import { Person } from '../../../interfaces/person.interface';
 import { TableService } from '../../../service/table.service';
 import { FormServiceService } from '../../../service/form-service.service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -37,7 +38,17 @@ export class TableComponent implements OnInit {
     console.log('eliminar', id);
 
     this.fs.deletePerson(id)
+    .pipe(
+      finalize(()=> this.ts.getAllPersons().subscribe(
+        resp => { 
+          this.persons = [...resp];
+        console.log(this.persons)}
+      ))
+    )
+    .subscribe(
+      resp => console.log(resp)
+    )
 
-    this.persons = this.persons.filter(e => e.id !== id)
+    
   }
 }

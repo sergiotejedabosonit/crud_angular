@@ -15,9 +15,7 @@ export class ValidationService {
 
     // este control es un FormGroup con controls, errors, pristine, status, value, touched... se ejecuta cada vez que haces keyUp
     return (control: AbstractControl): ValidationErrors | null => {
-
-      console.log(control.get(password1)?.value)
-
+ 
       const pass1 = control.get(password1)?.value;
       const pass2 = control.get(password2)?.value;
 

@@ -6,6 +6,7 @@ import { ValidationService } from '../../../service/validation.service';
 import { emailPattern } from '../../../service/validators'; 
 import { TableService } from '../../../service/table.service';
 import { Person } from '../../../interfaces/person.interface';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -56,44 +57,59 @@ export class FormComponent implements OnInit {
   }
   
   campoEsValido( campo: string){
-    console.log(this.miFormulario.controls[campo].errors)
+    
     return this.miFormulario.controls[campo].errors && this.miFormulario.controls[campo].touched
+  }
+
+  actualizarTable(){
+    this.ts.getAllPersons().subscribe(
+      resp => { 
+        this.persons = [...resp];
+      console.log(this.persons)}
+    )
   }
 
   guardar(){
     // POST al db.json
-
+     
     if(this.miFormulario.value.id === ''){
 
-      console.log('id === nada')
-      this.fs.savePerson(this.miFormulario.value)
-
-    
-    const newPerson = this.miFormulario.value
-    newPerson.id = this.persons.length+1
-    console.log(this.persons.length+1)
-
-    console.log(newPerson)
-  
-    //para que se vea en directo, voy a hacer push a persons
-    this.persons.push(
-      newPerson
+      
+      this.fs.savePerson(this.miFormulario.value).pipe(
+        finalize(()=> this.ts.getAllPersons().subscribe(
+          resp => { 
+            this.persons = [...resp];
+          console.log(this.persons)}
+        ))
       )
+      .subscribe(
+        data => {
+          console.log('POST Request is successful ', data);
+        }
+      )
+    
 
-     
     } else {
 
-      console.log('id', this.miFormulario.value)
+      
       const index = this.miFormulario.value.id -1
 
-      this.fs.updatePerson(this.miFormulario.value.id, this.miFormulario.value)
+      this.fs.updatePerson(this.miFormulario.value.id, this.miFormulario.value).pipe(
+        finalize(()=> this.ts.getAllPersons().subscribe(
+          resp => { 
+            this.persons = [...resp];
+          console.log(this.persons)}
+        ))
+      ).subscribe(
+        resp => console.log(resp)
+      )
 
-      console.log(this.persons[0])
+       
       this.persons[index] = this.miFormulario.value
       
     }
 
-    console.log('pasamos por guardar')
+    
   
     // Reset de los valores del formulario
     this.miFormulario.reset({
@@ -106,10 +122,12 @@ export class FormComponent implements OnInit {
       city: ''
     })  
    
+    
   }
+  
 
   editUser( event: any){
-    console.log(event)
+    
     this.miFormulario.reset(
       event 
     )
