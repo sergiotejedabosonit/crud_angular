@@ -16,8 +16,8 @@
                 <td>{{person.name}}</td>
                 <td>{{person.email}}</td>
                 <td>
-                    <span *ngIf="person.notifications === true"><i class="pi pi-check-circle"></i></span>
-                    <span *ngIf="person.notifications === false"><i class="pi pi-times-circle"></i></span>
+                    <span *ngIf="person.notifications"><i class="pi pi-check-circle"></i></span>
+                    <span *ngIf="!person.notifications"><i class="pi pi-times-circle"></i></span>
                 </td>
                 <td>{{person.country}}</td>
                 <td>{{person.city}}</td>

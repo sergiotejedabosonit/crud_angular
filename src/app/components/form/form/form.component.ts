@@ -65,7 +65,7 @@ export class FormComponent implements OnInit {
     this.ts.getAllPersons().subscribe(
       resp => { 
         this.persons = [...resp];
-      console.log(this.persons)}
+    }
     )
   }
 
@@ -79,7 +79,7 @@ export class FormComponent implements OnInit {
         finalize(()=> this.ts.getAllPersons().subscribe(
           resp => { 
             this.persons = [...resp];
-          console.log(this.persons)}
+          }
         ))
       )
       .subscribe(
@@ -97,8 +97,7 @@ export class FormComponent implements OnInit {
       this.fs.updatePerson(this.miFormulario.value.id, this.miFormulario.value).pipe(
         finalize(()=> this.ts.getAllPersons().subscribe(
           resp => { 
-            this.persons = [...resp];
-          console.log(this.persons)}
+            this.persons = [...resp]; }
         ))
       ).subscribe(
         resp => console.log(resp)

@@ -30,7 +30,7 @@ export class FormServiceService {
 
   deletePerson(id: number) {
     const url = `${this._baseUrl}/${id}`
-    console.log('deletePerson')
+     
     return this.http.delete<Person>(url)
   }
 

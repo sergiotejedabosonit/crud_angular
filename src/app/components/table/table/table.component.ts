@@ -35,20 +35,18 @@ export class TableComponent implements OnInit {
   }
   
   eliminarUser(id: number){
-    console.log('eliminar', id);
+    
 
     this.fs.deletePerson(id)
     .pipe(
       finalize(()=> this.ts.getAllPersons().subscribe(
         resp => { 
           this.persons = [...resp];
-        console.log(this.persons)}
+       }
       ))
     )
     .subscribe(
       resp => console.log(resp)
     )
-
-    
   }
 }
